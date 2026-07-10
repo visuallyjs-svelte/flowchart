@@ -1,22 +1,12 @@
 <script lang="ts">
     import { LINE_WIDTHS } from "./constants";
     import {ColorPickerComponent, EdgeTypePickerComponent, InspectorComponent} from "@visuallyjs/browser-ui-svelte"
-    import {Base} from "@visuallyjs/browser-ui";
 
-    let currentType = $state("")
-
-    function renderEmptyContainer() {
-        currentType = ''
-    }
-
-    function refresh(obj: Base) {
-        currentType = obj.objectType
-    }
+    let current = $state(null)
 </script>
 
-<InspectorComponent refresh={refresh} className="vjs-flowchart-inspector"
-					renderEmptyContainer={renderEmptyContainer}>
-	{#if currentType==='Node'}
+<InspectorComponent className="vjs-flowchart-inspector" bind:current={current}>
+	{#if current?.objectType==='Node'}
 		<div class="vjs-inspector-section">
 			<div>Label</div>
 			<input type="text" vjs-att="label" vjs-focus/>
@@ -46,7 +36,7 @@
 		</div>
 	{/if}
 
-	{#if currentType==='Edge'}
+	{#if current?.objectType==='Edge'}
 		<div class="vjs-inspector-section">
 			<div>Label</div>
 			<input type="text" vjs-att="label"/>
