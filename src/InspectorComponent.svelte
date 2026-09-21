@@ -1,6 +1,10 @@
 <script lang="ts">
     import { LINE_WIDTHS } from "./constants";
-    import {ColorPickerComponent, EdgeTypePickerComponent, InspectorComponent} from "@visuallyjs/browser-ui-svelte"
+    import {
+        ColorPickerComponent,
+        EdgePropertyMappingsInspector,
+        InspectorComponent
+    } from "@visuallyjs/browser-ui-svelte"
 
     let current = $state(null)
 </script>
@@ -41,22 +45,7 @@
 			<div>Label</div>
 			<input type="text" vjs-att="label"/>
 		</div>
-		<div class="vjs-inspector-section">
-			<div>Line style</div>
-			<EdgeTypePickerComponent propertyName="lineStyle"/>
-		</div>
-		<div class="vjs-inspector-section">
-			<div>Markers</div>
-			<EdgeTypePickerComponent propertyName="markers"/>
-		</div>
-		<div class="vjs-inspector-section">
-			<div>Line width</div>
-			<select vjs-att="lineWidth" vjs-datatype="integer">
-				{#each LINE_WIDTHS as lw}
-					<option value={lw}>{lw}</option>
-				{/each}
-			</select>
-		</div>
+		<EdgePropertyMappingsInspector/>
 	{/if}
 
 </InspectorComponent>
